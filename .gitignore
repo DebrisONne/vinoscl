@@ -1,0 +1,90 @@
+# Entornos virtuales
+venv/
+.env
+.envrc
+
+# Archivos de configuración del entorno
+*.env
+*.local
+
+# Archivos compilados de Python
+*.py[cod]
+__pycache__/
+*.so
+
+# Archivos de bases de datos locales
+*.sqlite3
+
+# Archivos de migraciones
+*/migrations/__pycache__/
+*/migrations/*.pyc
+*/migrations/*.pyo
+
+# Archivos de medios y estáticos
+media/
+staticfiles/
+
+# Archivos de logs
+*.log
+
+# Archivos de configuraciones locales
+settings_local.py
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos de editor de texto/IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Archivos de pytest
+.pytest_cache/
+# Entornos virtuales
+venv/
+.env
+.envrc
+
+# Archivos de configuración del entorno
+*.env
+*.local
+
+# Archivos compilados de Python
+*.py[cod]
+__pycache__/
+*.so
+
+# Archivos de bases de datos locales
+*.sqlite3
+
+# Archivos de migraciones
+*/migrations/__pycache__/
+*/migrations/*.pyc
+*/migrations/*.pyo
+
+# Archivos de medios y estáticos
+media/
+staticfiles/
+
+# Archivos de logs
+*.log
+
+# Archivos de configuraciones locales
+settings_local.py
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+
+# Archivos de editor de texto/IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Archivos de pytest
+.pytest_cache/
