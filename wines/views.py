@@ -19,6 +19,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from django.db.models import Q, Count
 from django.contrib.postgres.search import TrigramSimilarity
 from django.db.models import Q
+from selenium.webdriver.chrome.options import Options
 
 
 
@@ -182,7 +183,12 @@ def scrape_vinoteca():
     # url = "https://www.lavinoteca.cl/Requingua%20Toro%20de%20Piedra%20Espumante%20Brut"
     # s = Service(r"F:/Coding/freelnce/vinoscl/chromedriver-win64/chromedriver.exe")
     # driver = webdriver.Chrome(service=s)
-    driver = webdriver.Chrome()
+    options = Options()
+    options.headless = True  # Ejecutar en modo headless
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+
+    driver = webdriver.Chrome(options=options)
     driver.maximize_window()
     driver.get(url)
     time.sleep(5)
@@ -249,7 +255,12 @@ def scrape_ewine():
     # url = "https://ewine.cl/vinos-12?q=Filtros-Botellas+individuales&order=product.name.asc&page=10"
     # s = Service(r"F:/Coding/freelnce/vinoscl/chromedriver-win64/chromedriver.exe")
     # driver = webdriver.Chrome(service=s)
-    driver = webdriver.Chrome()
+    options = Options()
+    options.headless = True  # Ejecutar en modo headless
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+
+    driver = webdriver.Chrome(options=options)
     driver.maximize_window()
     driver.get(url)
     time.sleep(5)
@@ -337,7 +348,12 @@ def scrape_mundo_vino():
     url = "https://elmundodelvino.cl/collections/vinos?sort_by=title-ascending"
     # s = Service(r"F:/Coding/freelnce/vinoscl/chromedriver-win64/chromedriver.exe")
     # driver = webdriver.Chrome(service=s)
-    driver = webdriver.Chrome()
+    options = Options()
+    options.headless = True  # Ejecutar en modo headless
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+
+    driver = webdriver.Chrome(options=options)
     driver.maximize_window()
     driver.get(url)
     time.sleep(5)
