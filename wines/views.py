@@ -187,8 +187,13 @@ def scrape_vinoteca():
     options.headless = True  # Ejecutar en modo headless
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--disable-gpu")
+    options.add_argument("--window-size=1920x1080")  # Establecer tamaño de ventana
+    options.add_argument("--remote-debugging-port=9222")  # Puerto para depuración remota
 
-    driver = webdriver.Chrome(options=options)
+    # Iniciar el servicio de Chrome
+    service = Service('/usr/bin/chromium')
+    driver = webdriver.Chrome(service=service, options=options)
     driver.maximize_window()
     driver.get(url)
     time.sleep(5)
