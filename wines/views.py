@@ -180,8 +180,9 @@ def scrape_vinoteca():
     store = Store.objects.get(pk=7)
     url = "https://www.lavinoteca.cl/home?O=OrderByNameASC&PS=64"
     # url = "https://www.lavinoteca.cl/Requingua%20Toro%20de%20Piedra%20Espumante%20Brut"
-    s = Service(r"F:/Coding/freelnce/vinoscl/chromedriver-win64/chromedriver.exe")
-    driver = webdriver.Chrome(service=s)
+    # s = Service(r"F:/Coding/freelnce/vinoscl/chromedriver-win64/chromedriver.exe")
+    # driver = webdriver.Chrome(service=s)
+    driver = webdriver.Chrome()
     driver.maximize_window()
     driver.get(url)
     time.sleep(5)
@@ -246,8 +247,9 @@ def scrape_ewine():
     url = "https://ewine.cl/vinos-12?q=Filtros-Botellas+individuales"
     # url = 'https://ewine.cl/vinos-12?q=Filtros-Botellas+individuales&order=product.name.asc'
     # url = "https://ewine.cl/vinos-12?q=Filtros-Botellas+individuales&order=product.name.asc&page=10"
-    s = Service(r"F:/Coding/freelnce/vinoscl/chromedriver-win64/chromedriver.exe")
-    driver = webdriver.Chrome(service=s)
+    # s = Service(r"F:/Coding/freelnce/vinoscl/chromedriver-win64/chromedriver.exe")
+    # driver = webdriver.Chrome(service=s)
+    driver = webdriver.Chrome()
     driver.maximize_window()
     driver.get(url)
     time.sleep(5)
@@ -333,8 +335,9 @@ def scrape_ewine():
 def scrape_mundo_vino():
     store = Store.objects.get(pk=9)
     url = "https://elmundodelvino.cl/collections/vinos?sort_by=title-ascending"
-    s = Service(r"F:/Coding/freelnce/vinoscl/chromedriver-win64/chromedriver.exe")
-    driver = webdriver.Chrome(service=s)
+    # s = Service(r"F:/Coding/freelnce/vinoscl/chromedriver-win64/chromedriver.exe")
+    # driver = webdriver.Chrome(service=s)
+    driver = webdriver.Chrome()
     driver.maximize_window()
     driver.get(url)
     time.sleep(5)
