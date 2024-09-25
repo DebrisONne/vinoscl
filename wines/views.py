@@ -188,10 +188,9 @@ def scrape_vinoteca():
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
 
-    # Iniciar el servicio de Chrome
-    service = Service('/usr/bin/chromium')
+    # Iniciar el servicio de ChromeDriver
+    service = Service('/usr/local/bin/chromedriver')  # Actualiza la ruta aquí
     driver = webdriver.Chrome(service=service, options=options)
-    driver.maximize_window()
     driver.get(url)
     time.sleep(5)
 
