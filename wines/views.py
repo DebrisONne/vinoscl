@@ -188,8 +188,7 @@ def scrape_vinoteca():
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
 
-    # Iniciar el servicio de ChromeDriver
-    service = Service('/usr/local/bin/chromedriver')  # Actualiza la ruta aquí
+    service = Service('/usr/local/bin/chromedriver')
     driver = webdriver.Chrome(service=service, options=options)
     driver.get(url)
     time.sleep(5)
@@ -257,12 +256,12 @@ def scrape_ewine():
     # s = Service(r"F:/Coding/freelnce/vinoscl/chromedriver-win64/chromedriver.exe")
     # driver = webdriver.Chrome(service=s)
     options = Options()
-    options.headless = True  # Ejecutar en modo headless
-    options.add_argument("--no-sandbox")
-    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument('--headless')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
 
-    driver = webdriver.Chrome(options=options)
-    driver.maximize_window()
+    service = Service('/usr/local/bin/chromedriver')
+    driver = webdriver.Chrome(service=service, options=options)
     driver.get(url)
     time.sleep(5)
 
@@ -350,13 +349,13 @@ def scrape_mundo_vino():
     # s = Service(r"F:/Coding/freelnce/vinoscl/chromedriver-win64/chromedriver.exe")
     # driver = webdriver.Chrome(service=s)
     options = Options()
-    options.headless = True  # Ejecutar en modo headless
-    options.add_argument("--no-sandbox")
-    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument('--headless')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
 
-    driver = webdriver.Chrome(options=options)
+    service = Service('/usr/local/bin/chromedriver')
+    driver = webdriver.Chrome(service=service, options=options)
     driver.maximize_window()
-    driver.get(url)
     time.sleep(5)
 
     img_temp = tempfile.NamedTemporaryFile(delete=True)
