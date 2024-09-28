@@ -69,9 +69,11 @@ def check_product_existence(data):
 
     similar_products = Product.objects.filter(combined_query)
 
+    nlp = spacy.load("es_core_news_sm")
+
     for product in similar_products:
         print('comparando', name, 'con', product.name)
-        if similar_names(name, product.name):
+        if similar_names(name, product.name, nlp):
             print('Coincidencia encontrada, ignorando producto...')
             return product
 
@@ -79,7 +81,7 @@ def check_product_existence(data):
     return None 
 
 
-def similar_names(name1, name2):
+def similar_names(name1, name2, nlp):
     name1 = name1.lower()
     name2 = name2.lower()
 
@@ -89,7 +91,6 @@ def similar_names(name1, name2):
     name1 = re.sub(r'[^\w\s]', '', name1)
     name2 = re.sub(r'[^\w\s]', '', name2)
 
-    nlp = spacy.load("es_core_news_sm")
     name_1 = nlp(name1)
     name_2 = nlp(name2)
 
