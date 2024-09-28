@@ -356,7 +356,7 @@ def scrape_mundo_vino():
 
     service = Service('/usr/local/bin/chromedriver')
     driver = webdriver.Chrome(service=service, options=options)
-    driver.maximize_window()
+    driver.get(url)
     time.sleep(5)
 
     img_temp = tempfile.NamedTemporaryFile(delete=True)
