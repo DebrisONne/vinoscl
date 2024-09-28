@@ -311,7 +311,7 @@ def scrape_ewine():
                     price_span = product_element.find('span', class_='current-price')
                     price = price_span.text.strip()
                
-                active_page_element = driver.find_element(By.CSS_SELECTOR, 'div.pagination-wrapper li.current')
+                active_page_element = driver.find_element(By.CSS_SELECTOR, 'li.active.current.page-item')
                 current_page = int(active_page_element.text)
 
                 product_data = {
