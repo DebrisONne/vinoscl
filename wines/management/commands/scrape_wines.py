@@ -5,9 +5,9 @@ class Command(BaseCommand):
     help = 'Comando para iniciar el scraping de vinotecas.'
 
     def handle(self, *args, **options):
-        #self.stdout.write("Iniciando el scraping de la vinoteca...")
-        #result_vinoteca = scrape_vinoteca()
-        #self.stdout.write(f"Scraping de la vinoteca completado: {result_vinoteca}")
+        self.stdout.write("Iniciando el scraping de la vinoteca...")
+        result_vinoteca = scrape_vinoteca()
+        self.stdout.write(f"Scraping de la vinoteca completado: {result_vinoteca}")
 
         #self.stdout.write("Iniciando el scraping de eWine...")
         #result_ewine = scrape_ewine()
