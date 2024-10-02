@@ -13,6 +13,6 @@ class Command(BaseCommand):
         #result_ewine = scrape_ewine()
         #self.stdout.write(f"Scraping de eWine completado: {result_ewine}")
 
-        # self.stdout.write("Iniciando el scraping de Mundo Vino...")
-        # result_mundo_vino = scrape_mundo_vino()
-        # self.stdout.write(f"Scraping de Mundo Vino completado: {result_mundo_vino}")
+        self.stdout.write("Iniciando el scraping de Mundo Vino...")
+        result_mundo_vino = scrape_mundo_vino()
+        self.stdout.write(f"Scraping de Mundo Vino completado: {result_mundo_vino}")
