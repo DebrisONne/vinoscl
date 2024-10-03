@@ -111,9 +111,9 @@ def similar_images(img1, img2):
 
 
 def update_products(data):
-    scrape_vinoteca() 
+    # scrape_vinoteca() 
     scrape_ewine()
-    scrape_mundo_vino()    
+    # scrape_mundo_vino()    
     
     return HttpResponse("Done.")
 
@@ -251,8 +251,7 @@ def scrape_vinoteca():
 def scrape_ewine():
     print('******* SCRAPING EWINE *******')
     store = Store.objects.get(pk=8)
-    url = "https://ewine.cl/vinos-12?q=Filtros-Botellas+individuales"
-    # url = 'https://ewine.cl/vinos-12?q=Filtros-Botellas+individuales&order=product.name.asc'
+    url = "https://ewine.cl/vinos-12?q=Filtros-Botellas+individuales&order=product.name.asc"
     # url = "https://ewine.cl/vinos-12?q=Filtros-Botellas+individuales&order=product.name.asc&page=10"
     # s = Service(r"F:/Coding/freelnce/vinoscl/chromedriver-win64/chromedriver.exe")
     # driver = webdriver.Chrome(service=s)
@@ -277,6 +276,21 @@ def scrape_ewine():
         except:
             print('Modal no existe >>> continuando')
 
+
+        try:
+            shadow_host = driver.find_element(By.CSS_SELECTOR, "div[data-gr-prompt='content']")
+            shadow_root = shadow_host.shadow_root  # Obtenemos el shadow root
+
+            no_gracias_button = WebDriverWait(shadow_root, 1).until(EC.element_to_be_clickable(
+                (By.CSS_SELECTOR, "button[data-gr-prompt-button='cancel']")))
+            no_gracias_button.click()
+            print("Modal cerrado exitosamente con 'No, gracias'.")
+            
+        except Exception as e:
+            print(f"No se pudo cerrar el modal: {str(e)}")
+           
+
+
         try:
             age_modal = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "ets_av_content_popup")))
             yes_button = age_modal.find_element(By.ID, "ets_av_their_self")
@@ -289,7 +303,8 @@ def scrape_ewine():
             else:
                 print("El botón 'Sí' no está disponible para ser clickeado")
         except Exception as e:
-            print(f"No se pudo encontrar o hacer clic en el botón 'Sí' en el modal de verificación de edad: {str(e)}")
+            print(f"No se pudo cerrar modal de ofertas")
+
 
 
         product_elements = soup.find_all('article', class_='product-miniature')
@@ -326,18 +341,30 @@ def scrape_ewine():
                 save_product(product_data)
 
         try:
-            pager_bottom = driver.find_element(By.CLASS_NAME, 'pagination')
-            next_button = pager_bottom.find_element(By.CLASS_NAME, 'next')
-            if 'disabled' in next_button.get_attribute('class'):
+            pager_bottom = driver.find_element(By.XPATH, "//nav[contains(@class, 'pagination')]")
+            
+            next_buttons = pager_bottom.find_elements(By.XPATH, ".//a[contains(@class, 'next')]")
+            
+            if len(next_buttons) == 0:
+                print("No hay botón 'Next'. Ya estamos en la última página.")
+                break  
+
+            next_button = next_buttons[0]
+            
+            driver.execute_script("arguments[0].scrollIntoView(true);", next_button)
+            time.sleep(1) 
+
+            if next_button.is_enabled():
+                print("El botón 'Next' está habilitado y se hará clic.")
+                next_button.click()
+                time.sleep(5) 
+            else:
+                print("El botón 'Next' está deshabilitado. Ya hemos llegado a la última página.")
                 break
-            next_button.click()
-            time.sleep(5) 
-        except NoSuchElementException:
-            print("El botón 'Next' no se encontró en la página actual")
-            return False
+
         except Exception as e:
-            print(f"Error: {str(e)}")
-            return False
+            print(f"Error al encontrar el botón 'Next': {str(e)}")
+
 
     driver.quit()
     print("******* TIENDA EWINE FINALIZADA *******")
