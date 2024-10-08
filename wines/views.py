@@ -52,20 +52,7 @@ def get_chromedriver_path():
     
     return chromedriver_path
 
-# Usar la función para obtener la ruta del ChromeDriver
-chrome_driver_path = get_chromedriver_path()
 
-# Ahora puedes usar chrome_driver_path en tu configuración de Selenium
-from selenium.webdriver.chrome.service import Service
-from selenium import webdriver
-
-service = Service(chrome_driver_path)
-
-options = webdriver.ChromeOptions()
-options.headless = True  # Si necesitas el modo headless
-
-# Crear el driver de Selenium con el servicio
-driver = webdriver.Chrome(service=service, options=options)
 
 
 def index(request):
