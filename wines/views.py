@@ -351,11 +351,12 @@ def scrape_ewine():
             driver.execute_script("arguments[0].scrollIntoView(true);", next_button)
             time.sleep(1) 
 
-            try:
-                WebDriverWait(driver, 10).until(EC.element_to_be_clickable((By.XPATH, "//a[contains(@class, 'next')]"))).click()
-                time.sleep(5)
-            except Exception as e:
-                print(f"Error al hacer clic en el botón 'Next': {str(e)}")
+            if next_button.is_enabled():
+                print("El botón 'Next' está habilitado y se hará clic.")
+                next_button.click()
+                time.sleep(5) 
+            else:
+                print("El botón 'Next' está deshabilitado. Ya hemos llegado a la última página.")
                 break
 
         except Exception as e:
