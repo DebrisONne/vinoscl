@@ -260,8 +260,8 @@ def scrape_ewine():
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
 
-    service = Service('/usr/local/bin/geckodriverr')
-    driver = webdriver.Chrome(service=service, options=options)
+    service = Service('/usr/local/bin/geckodriver')
+    driver = webdriver.Firefox(service=service, options=options)
     driver.get(url)
     time.sleep(5)
 
