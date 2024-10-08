@@ -253,15 +253,15 @@ def scrape_ewine():
     store = Store.objects.get(pk=8)
     url = "https://ewine.cl/vinos-12?q=Filtros-Botellas+individuales&order=product.name.asc"
     # url = "https://ewine.cl/vinos-12?q=Filtros-Botellas+individuales&order=product.name.asc&page=10"
-    s = Service(r"F:/Coding/freelnce/vinoscl/chromedriver-win64/chromedriver.exe")
-    driver = webdriver.Chrome(service=s)
-    # options = Options()
-    # options.add_argument('--headless')
-    # options.add_argument('--no-sandbox')
-    # options.add_argument('--disable-dev-shm-usage')
+    # s = Service(r"F:/Coding/freelnce/vinoscl/chromedriver-win64/chromedriver.exe")
+    # driver = webdriver.Chrome(service=s)
+    options = Options()
+    options.add_argument('--headless')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
 
-    # service = Service('/usr/local/bin/chromedriver')
-    # driver = webdriver.Chrome(service=service, options=options)
+    service = Service('/usr/local/bin/chromedriver')
+    driver = webdriver.Chrome(service=service, options=options)
     driver.get(url)
     time.sleep(5)
 
