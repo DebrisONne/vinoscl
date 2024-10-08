@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 from .models import Product, Store, ProductStore, ProductPrice 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.firefox.service import Service
 from django.shortcuts import render, get_object_or_404
 from tempfile import NamedTemporaryFile
 from urllib.request import urlopen
