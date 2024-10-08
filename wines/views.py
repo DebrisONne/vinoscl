@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 from .models import Product, Store, ProductStore, ProductPrice 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
-from selenium.webdriver.firefox.service import Service
+from selenium.webdriver.chrome.service import Service
 from django.shortcuts import render, get_object_or_404
 from tempfile import NamedTemporaryFile
 from urllib.request import urlopen
@@ -19,7 +19,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from django.db.models import Q, Count
 from django.contrib.postgres.search import TrigramSimilarity
 from django.db.models import Q
-from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.chrome.options import Options
 
 
 
@@ -260,8 +260,8 @@ def scrape_ewine():
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
 
-    service = Service('/usr/local/bin/geckodriver')
-    driver = webdriver.Firefox(service=service, options=options)
+    service = Service('/usr/local/bin/chromedriver')
+    driver = webdriver.Chrome(service=service, options=options)
     driver.get(url)
     time.sleep(5)
 
