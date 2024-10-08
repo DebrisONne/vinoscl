@@ -20,8 +20,52 @@ from django.db.models import Q, Count
 from django.contrib.postgres.search import TrigramSimilarity
 from django.db.models import Q
 from selenium.webdriver.chrome.options import Options
+import os
 
 
+
+def get_chromedriver_path():
+    """
+    Retorna la ruta del archivo chromedriver.exe basado en el entorno.
+    - Si está en PythonAnywhere, devuelve la ruta en PythonAnywhere.
+    - Si está en local, devuelve la ruta en el entorno local.
+
+    :return: Ruta absoluta al archivo chromedriver.exe
+    """
+    # Detectar si estamos en PythonAnywhere
+    is_pythonanywhere = 'pythonanywhere' in os.getenv('HOSTNAME', '').lower()
+
+    # Obtener la raíz del proyecto (asumimos que el script se ejecuta desde la raíz del proyecto)
+    project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))  # Va un nivel hacia arriba
+
+    # Construir la ruta de acuerdo al entorno
+    if is_pythonanywhere:
+        # En PythonAnywhere, la ruta sería algo así
+        chromedriver_path = os.path.join('/home/tu_usuario/vinoscl/chromedriver-win64', 'chromedriver')
+    else:
+        # Localmente, la ruta sería algo así
+        chromedriver_path = os.path.join(project_root, 'chromedriver-win64', 'chromedriver.exe')
+
+    # Verificar si el archivo existe
+    if not os.path.exists(chromedriver_path):
+        raise FileNotFoundError(f"ChromeDriver no encontrado en: {chromedriver_path}")
+    
+    return chromedriver_path
+
+# Usar la función para obtener la ruta del ChromeDriver
+chrome_driver_path = get_chromedriver_path()
+
+# Ahora puedes usar chrome_driver_path en tu configuración de Selenium
+from selenium.webdriver.chrome.service import Service
+from selenium import webdriver
+
+service = Service(chrome_driver_path)
+
+options = webdriver.ChromeOptions()
+options.headless = True  # Si necesitas el modo headless
+
+# Crear el driver de Selenium con el servicio
+driver = webdriver.Chrome(service=service, options=options)
 
 
 def index(request):
@@ -261,7 +305,8 @@ def scrape_ewine():
     options.add_argument('--no-sandbox')
     options.add_argument('--disable-dev-shm-usage')
 
-    service = Service('/usr/local/bin/chromedriver')
+    chrome_driver_path = get_chromedriver_path()
+    service = Service(chrome_driver_path)
     driver = webdriver.Chrome(service=service, options=options)
     driver.get(url)
     time.sleep(5)
