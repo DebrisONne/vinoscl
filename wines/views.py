@@ -284,13 +284,10 @@ def scrape_ewine():
             no_gracias_button = WebDriverWait(shadow_root, 1).until(EC.element_to_be_clickable(
                 (By.CSS_SELECTOR, "button[data-gr-prompt-button='cancel']")))
             no_gracias_button.click()
-            print("Modal cerrado exitosamente con 'No, gracias'.")
             
         except Exception as e:
-            print(f"No se pudo cerrar el modal: {str(e)}")
+            print('Modal no existe >>> continuando')
            
-
-
         try:
             age_modal = WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.CLASS_NAME, "ets_av_content_popup")))
             yes_button = age_modal.find_element(By.ID, "ets_av_their_self")
@@ -364,6 +361,7 @@ def scrape_ewine():
 
         except Exception as e:
             print(f"Error al encontrar el botón 'Next': {str(e)}")
+            break
 
 
     driver.quit()
