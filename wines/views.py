@@ -19,7 +19,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 from django.db.models import Q, Count
 from django.contrib.postgres.search import TrigramSimilarity
 from django.db.models import Q
-from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.firefox.options import Options
 
 
 
